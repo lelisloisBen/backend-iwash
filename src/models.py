@@ -10,7 +10,7 @@ class Users(db.Model):
     password = db.Column(db.String(80), nullable=False)
     avatar = db.Column(db.String(220), default='avatar.png')
     wallet = db.Column(db.Float(5), default=0)
-    admin = db.Column(db.Integer, defaulf=0)
+    admin = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Users %r>' % self.email
@@ -160,7 +160,6 @@ class Dryers(db.Model):
         }
 
 class CurrentWashing(db.Model):
-    import datetime
     id = db.Column(db.Integer(), primary_key=True)
     userID = db.Column(db.Integer())
     userEmail = db.Column(db.String(220))

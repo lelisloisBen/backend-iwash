@@ -166,8 +166,6 @@ def washer_add():
 def dryers_add():
     body = request.get_json()
 
-    updateDryer = Dryers.query.get(body['id'])
-
     if request.method == 'POST':
         db.session.add(Dryers(
             type = body['type'],
@@ -187,6 +185,8 @@ def dryers_add():
         })
 
     if request.method == 'PUT':
+        updateDryer = Dryers.query.get(body['id'])
+
         if updateDryer is None:
             raise APIException('Dryer not found', status_code=404)
 

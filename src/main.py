@@ -288,6 +288,9 @@ def start_wash():
             cycleComplete = body['cycleComplete']
         ))
 
+        updateWallet = Users.query.get(body['userID'])
+        updateWallet.wallet = body['new_wallet']
+
         db.session.commit()
 
         return jsonify({

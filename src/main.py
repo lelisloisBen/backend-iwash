@@ -302,7 +302,7 @@ def get_user_current_wash():
     body = request.get_json()
     if request.method == 'POST':
 
-        getWashing = CurrentWashing.query.filter_by(userID=body['user_id'], userEmail=body['user_email'])
+        getWashing = CurrentWashing.query.filter_by(userID=body['user_id'], userEmail=body['user_email'], cycleComplete='no')
         if not getWashing:
             return jsonify({'msg':'No washing in pregress'}), 404
 

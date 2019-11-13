@@ -314,16 +314,16 @@ def get_user_current_wash():
 def wash_done():
     body = request.get_json()
     if request.method == 'PUT':
-         updateCycle = CurrentWashing.query.get(body['id'])
+        updateCycle = CurrentWashing.query.get(body['id'])
             
         if "id" in body:
             updateCycle.cycleComplete = 'yes'
-
+            
             db.session.commit()
             return jsonify({
                 'updated': 'success',
                 'msg': 'Successfully Updated'
-            })
+                })
 
 
     return "Invalid Method", 404

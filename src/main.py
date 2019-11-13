@@ -315,9 +315,6 @@ def wash_done():
     body = request.get_json()
     if request.method == 'PUT':
          updateCycle = CurrentWashing.query.get(body['id'])
-
-        if updateCycle is None:
-            raise APIException('Current Washing not found', status_code=404)
             
         if "id" in body:
             updateCycle.cycleComplete = 'yes'

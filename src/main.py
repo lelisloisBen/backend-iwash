@@ -310,10 +310,10 @@ def get_user_current_wash():
 
     return "Invalid Method", 404
 
-@app.route('/done_washing', methods=['PUT'])
+@app.route('/done_washing', methods=['POST'])
 def wash_done():
     body = request.get_json()
-    if request.method == 'PUT':
+    if request.method == 'POST':
          updateCycleComplete = CurrentWashing.query.get(body['id'])
 
         if updateCycleComplete is None:

@@ -310,7 +310,26 @@ def get_user_current_wash():
 
     return "Invalid Method", 404
 
+@app.route('/done_washing', methods=['PUT'])
+def wash_done():
+    body = request.get_json()
+    if request.method == 'PUT':
+         updateCycleComplete = CurrentWashing.query.get(body['id'])
 
+        if updateCycleComplete is None:
+            raise APIException('Current Washing not found', status_code=404)
+            
+        if "id" in body:
+            updateCycleComplete.cycleComplete = 'yes'
+
+            db.session.commit()
+            return jsonify({
+                'updated': 'success',
+                'msg': 'Successfully Updated'
+            })
+
+
+    return "Invalid Method", 404
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

@@ -313,6 +313,19 @@ def get_user_current_wash():
 
     return "Invalid Method", 404
 
+@app.route('/wash_history', methods=['POST'])
+def get_wash_history():
+    body = request.get_json()
+    if request.method == 'POST':
+
+        getWashing = CurrentWashing.query.filter_by(userID=body['user_id'], userEmail=body['user_email'], cycleComplete='yes')
+        if not getWashing:
+            return jsonify({'msg':'No washing in pregress'}), 404
+
+        return jsonify( [x.serialize() for x in getWashing] ), 200
+
+    return "Invalid Method", 404
+
 @app.route('/done_washing', methods=['PUT'])
 def wash_done():
     body = request.get_json()
